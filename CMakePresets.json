@@ -1,0 +1,88 @@
+{
+    "version": 10,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 31,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "base-gcc",
+            "hidden": true,
+            "description": "Base configuration for GCC 64-bit builds",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "gcc-14",
+                "CMAKE_CXX_COMPILER": "g++-14",
+                "CONAN_INSTALL_DIR": "conan-profiles/build-conan-packages-gcc"
+            }
+        },
+        {
+            "name": "base-clang",
+            "hidden": true,
+            "description": "Base configuration for GCC 64-bit builds",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "clang-20",
+                "CMAKE_CXX_COMPILER": "clang++-20",
+                "CONAN_INSTALL_DIR": "conan-profiles/build-conan-packages-clang"
+            }
+        },
+        {
+            "name": "gcc-release",
+            "inherits": "base-gcc",
+            "description": "Configure with GCC 14 for 64-bit release build",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        },
+        {
+            "name": "gcc-debug",
+            "inherits": "base-gcc",
+            "description": "Configure with GCC 14 for 64-bit debug build",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "clang-release",
+            "inherits": "base-clang",
+            "description": "Configure with Clang 20 for 64-bit release build",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        },
+        {
+            "name": "clang-debug",
+            "inherits": "base-clang",
+            "description": "Configure with Clang 20 for 64-bit debug build",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "gcc-release",
+            "configurePreset": "gcc-release",
+            "description": "Build with GCC 14 for 64-bit release build"
+        },
+        {
+            "name": "gcc-debug",
+            "configurePreset": "gcc-debug",
+            "description": "Build with GCC 14 for 64-bit debug build"
+        },
+        {
+            "name": "clang-release",
+            "configurePreset": "clang-release",
+            "description": "Build with Clang 20 for 64-bit release build"
+        },
+        {
+            "name": "clang-debug",
+            "configurePreset": "clang-debug",
+            "description": "Build with Clang 20 for 64-bit debug build"
+        }
+    ]
+}

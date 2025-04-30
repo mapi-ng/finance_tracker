@@ -29,11 +29,11 @@ else ()
 endif ()
 
 # Include Conan toolchain file if available
-set(CONAN_TOOLCHAIN_FILE "${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}/generators/conan_toolchain.cmake")
+set(CONAN_TOOLCHAIN_FILE "${CMAKE_SOURCE_DIR}/${CONAN_INSTALL_DIR}/${CMAKE_BUILD_TYPE}/generators/conan_toolchain.cmake")
 if(EXISTS ${CONAN_TOOLCHAIN_FILE})
     include(${CONAN_TOOLCHAIN_FILE})
 else()
-    message(WARNING "No conan_toolchain.cmake found, skipping Conan integration.")
+    message(WARNING "Skipping Conan integration. Path ${CONAN_TOOLCHAIN_FILE} does not exist.")
 endif()
 
 include(CTest)

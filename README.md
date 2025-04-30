@@ -16,17 +16,16 @@ To install Conan, follow these steps:
     ```
     conan --version
     ```
-4. Detect Conan profile
+4. Detect Conan profile (optional)
     ```
     conan profile detect --force
     ```
-    It will be named `default`
-5. Install packages from Conanfile.txt using included profiles.
+5. Install packages from Conanfile.txt using provided profiles.
     ```
-    conan install . --build=missing -pr ./conan-profiles/conan-profile-x64-gcc-debug.txt
-    conan install . --build=missing -pr ./conan-profiles/conan-profile-x64-gcc-release.txt
+    cd conan-profiles
+    ./conan-packages-installer.sh
     ```
-
+    Script will install packages for preset configurations.
 ## Build
 
 ```
