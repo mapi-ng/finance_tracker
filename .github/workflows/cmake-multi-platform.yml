@@ -10,7 +10,9 @@ on:
 
 jobs:
   build:
+    name: cmake build and test
     runs-on: ubuntu-latest
+    container: maping4/ubuntu_cpp:latest
 
     strategy:
       matrix:
