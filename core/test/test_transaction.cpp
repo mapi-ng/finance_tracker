@@ -15,6 +15,11 @@ class TransactionTest : public ::testing::Test {
   core::Transaction transaction{100};
 };
 
+TEST(TransactionUUID, UUIDGeneration) {
+  core::Transaction transaction(100);
+  EXPECT_FALSE(transaction.getId().is_nil());
+}
+
 TEST_F(TransactionTest, ParameterizedConstructor) {
   EXPECT_EQ(transaction.getAmount(), 100);
 }
