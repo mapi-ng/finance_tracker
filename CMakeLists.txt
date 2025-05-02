@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.31)
+cmake_minimum_required(VERSION 4.0)
 project(finance_tracker LANGUAGES CXX)
 message(STATUS "==== Configuring ${PROJECT_NAME} for ${CMAKE_SYSTEM_NAME} ====")
 message(STATUS "${PROJECT_NAME} VERSION: ${GIT_TAG}")
@@ -15,7 +15,6 @@ include(cmake/versionize.cmake)
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Generate compiler commands for C/C++ intellisense, SonarLint, etc.
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
