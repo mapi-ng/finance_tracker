@@ -34,3 +34,10 @@ TEST(TransactionTest, NegativeAmount) {
   core::Transaction transaction(-50);
   EXPECT_EQ(transaction.getAmount(), -50);
 }
+
+TEST(TransactionTest, SetDescription) {
+  core::Transaction transaction(1);
+  std::string description = "Grocery shopping";
+  transaction.setDescription(description);
+  EXPECT_EQ(transaction.getDescription(), description);
+}
