@@ -25,7 +25,7 @@ jobs:
       - name: Temporarily move conan packages to current source directory
         run: |
           git config --global safe.directory '*'
-          mv /conan-profiles/build-conan-packages* ./conan-profiles/
+          export CONAN_PROFILES_DIR=/conan-profiles
 
       - name: Configure with CMake preset (${{ matrix.preset }})
         run: cmake --preset ${{ matrix.preset }}
