@@ -28,8 +28,10 @@ endif()
 
 # Include Conan toolchain file if available
 if(DEFINED ENV{CONAN_PROFILES_DIR})
+    message(STATUS "Using Conan profiles directory from environment variable: $ENV{CONAN_PROFILES_DIR}.")
     set(CONAN_TOOLCHAIN_FILE "$ENV{CONAN_PROFILES_DIR}")
 else()
+    message(STATUS "Using Conan profiles directory from project configuration.")
     set(CONAN_TOOLCHAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/conan-profiles")
 endif()
 
