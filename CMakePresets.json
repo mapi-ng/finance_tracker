@@ -84,5 +84,27 @@
             "configurePreset": "clang-debug",
             "description": "Build with Clang 20 for 64-bit debug build"
         }
+    ],
+    "testPresets": [
+        {
+            "name": "gcc-release",
+            "configurePreset": "gcc-release",
+            "description": "Test 64-bit release build"
+        },
+        {
+            "name": "gcc-debug",
+            "configurePreset": "gcc-debug",
+            "description": "Test 64-bit debug build"
+        },
+        {
+            "name": "clang-release",
+            "configurePreset": "clang-release",
+            "description": "Test 64-bit release build"
+        },
+        {
+            "name": "clang-debug",
+            "configurePreset": "clang-debug",
+            "description": "Test 64-bit debug build"
+        }
     ]
 }
