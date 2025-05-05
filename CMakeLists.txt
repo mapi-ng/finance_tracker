@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 4.0)
 project(finance_tracker LANGUAGES CXX)
 message(STATUS "==== Configuring ${PROJECT_NAME} for ${CMAKE_SYSTEM_NAME} ====")
-message(STATUS "${PROJECT_NAME} VERSION: ${GIT_TAG}")
 
 if (UNIX)
     set(CMAKE_GENERATOR "Ninja")
