@@ -13,8 +13,8 @@
             "generator": "Ninja",
             "binaryDir": "${sourceDir}/build/${presetName}",
             "cacheVariables": {
-                "CMAKE_C_COMPILER": "gcc-14",
-                "CMAKE_CXX_COMPILER": "g++-14",
+                "CMAKE_C_COMPILER": "gcc-15",
+                "CMAKE_CXX_COMPILER": "g++-15",
                 "CMAKE_CXX_FLAGS": "--coverage",
                 "CONAN_INSTALL_DIR": "build-conan-packages-gcc"
             }
@@ -34,7 +34,7 @@
         {
             "name": "gcc-release",
             "inherits": "base-gcc",
-            "description": "Configure with GCC 14 for 64-bit release build",
+            "description": "Configure with GCC 15 for 64-bit release build",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release"
             }
@@ -42,7 +42,7 @@
         {
             "name": "gcc-debug",
             "inherits": "base-gcc",
-            "description": "Configure with GCC 14 for 64-bit debug build",
+            "description": "Configure with GCC 15 for 64-bit debug build",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug"
             }
@@ -68,12 +68,12 @@
         {
             "name": "gcc-release",
             "configurePreset": "gcc-release",
-            "description": "Build with GCC 14 for 64-bit release build"
+            "description": "Build with GCC 15 for 64-bit release build"
         },
         {
             "name": "gcc-debug",
             "configurePreset": "gcc-debug",
-            "description": "Build with GCC 14 for 64-bit debug build"
+            "description": "Build with GCC 15 for 64-bit debug build"
         },
         {
             "name": "clang-release",

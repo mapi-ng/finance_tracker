@@ -27,8 +27,19 @@ To install Conan, follow these steps:
     ./conan-packages-installer.sh
     ```
     Script will install packages for preset configurations.
-## Build
+
+## Configuring, building and testing
+
+Following commands will configure, build and run tests for the project based on the specified preset from `CMakePresets.json`
 
 ```
-cmake -B build -S . -G Ninja
+cmake --preset [preset]
+cmake --build --preset [preset]
+```
+
+For example:
+
+```
+cmake --preset gcc-debug
+cmake --build --preset gcc-debug
 ```
