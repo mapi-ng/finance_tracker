@@ -49,7 +49,7 @@ jobs:
         run: ctest --preset ${{ matrix.preset }} --output-on-failure
       
       - name: Generate coverage report
-        if: matrix.preset == 'DISABLED_gcc-debug'
+        if: matrix.preset == 'gcc-debug'
         run: |
           gcovr -r . \
             --exclude-directories build/_deps \
@@ -68,3 +68,4 @@ jobs:
         with:
           args: >
             --define sonar.cfamily.compile-commands=${{ env.BUILD_WRAPPER_OUT_DIR }}/compile_commands.json
+            --define sonar.cfamily.gcov.reportsPath=${{ github.workspace }}/coverage.xml
