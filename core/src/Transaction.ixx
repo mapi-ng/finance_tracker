@@ -1,5 +1,4 @@
 module;
-// Preprocessing directives
 #include <uuid.h>
 export module Transaction;
 
@@ -12,7 +11,7 @@ export class Transaction {
   using Timestamp = std::chrono::system_clock::time_point;
   Transaction(unsigned int amount,
               Timestamp timestamp = Timestamp::clock::now())
-      : id_{utils::generateUuid()}, amount_{amount}, timestamp_{timestamp} {}
+      : amount_{amount}, timestamp_{timestamp} {}
 
   unsigned int getAmount() const { return amount_; }
 
@@ -26,7 +25,7 @@ export class Transaction {
   void setAmount(unsigned int amount) { amount_ = amount; }
 
  private:
-  uuids::uuid id_;
+  uuids::uuid id_{utils::generateUuid()};
   unsigned int amount_;
   Timestamp timestamp_;
   std::string description_;
