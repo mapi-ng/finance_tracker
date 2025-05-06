@@ -39,8 +39,13 @@ jobs:
       - name: Build (${{ matrix.preset }})
         if: matrix.preset == 'gcc-debug'
         run: |
-          cat ${{ env.BUILD_WRAPPER_OUT_DIR }}/compile_commands.json
           build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake --build --preset ${{ matrix.preset }}
+          echo "Current directory contents:"
+          ls -la
+          echo "Build wrapper output directory contents:"
+          ls -la ${{ env.BUILD_WRAPPER_OUT_DIR }}
+          echo "Build folder contents:"
+          ls -la build
 
       - name: Build (${{ matrix.preset }})
         if: matrix.preset == 'clang-debug'
