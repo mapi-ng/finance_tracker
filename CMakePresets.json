@@ -1,8 +1,8 @@
 {
     "version": 10,
     "cmakeMinimumRequired": {
-        "major": 3,
-        "minor": 31,
+        "major": 4,
+        "minor": 0,
         "patch": 0
     },
     "configurePresets": [
@@ -15,7 +15,8 @@
             "cacheVariables": {
                 "CMAKE_C_COMPILER": "gcc-14",
                 "CMAKE_CXX_COMPILER": "g++-14",
-                "CONAN_INSTALL_DIR": "conan-profiles/build-conan-packages-gcc"
+                "CMAKE_CXX_FLAGS": "--coverage",
+                "CONAN_INSTALL_DIR": "build-conan-packages-gcc"
             }
         },
         {
@@ -27,7 +28,7 @@
             "cacheVariables": {
                 "CMAKE_C_COMPILER": "clang-20",
                 "CMAKE_CXX_COMPILER": "clang++-20",
-                "CONAN_INSTALL_DIR": "conan-profiles/build-conan-packages-clang"
+                "CONAN_INSTALL_DIR": "build-conan-packages-clang"
             }
         },
         {
@@ -83,6 +84,28 @@
             "name": "clang-debug",
             "configurePreset": "clang-debug",
             "description": "Build with Clang 20 for 64-bit debug build"
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "gcc-release",
+            "configurePreset": "gcc-release",
+            "description": "Test 64-bit release build"
+        },
+        {
+            "name": "gcc-debug",
+            "configurePreset": "gcc-debug",
+            "description": "Test 64-bit debug build"
+        },
+        {
+            "name": "clang-release",
+            "configurePreset": "clang-release",
+            "description": "Test 64-bit release build"
+        },
+        {
+            "name": "clang-debug",
+            "configurePreset": "clang-debug",
+            "description": "Test 64-bit debug build"
         }
     ]
 }

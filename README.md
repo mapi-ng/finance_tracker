@@ -1,4 +1,5 @@
 # Finance Tracker
+![Build](https://github.com/mapi-ng/finance_tracker/actions/workflows/cmake-multi-platform.yml/badge.svg) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=mapi-ng_finance_tracker&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=mapi-ng_finance_tracker)
 
 ## Prerequisites
 

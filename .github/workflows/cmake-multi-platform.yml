@@ -1,0 +1,70 @@
+# This starter workflow is for a CMake project running on multiple platforms. There is a different starter workflow if you just want a single platform.
+# See: https://github.com/actions/starter-workflows/blob/main/ci/cmake-single-platform.yml
+name: CMake Build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: cmake build and test
+    runs-on: ubuntu-latest
+    container: maping4/ubuntu_cpp:latest
+
+    env:
+      CONAN_PROFILES_DIR: /conan-profiles
+      BUILD_WRAPPER_OUT_DIR: bw-output
+
+    strategy:
+      matrix:
+        preset: [gcc-debug, clang-debug]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Before build
+        run: |
+          echo "Conan profiles directory: $CONAN_PROFILES_DIR"
+
+      - name: Install Build Wrapper
+        uses: SonarSource/sonarqube-scan-action/install-build-wrapper@v5
+
+      - name: Configure with CMake preset (${{ matrix.preset }})
+        run: cmake --preset ${{ matrix.preset }}
+
+      - name: Build (${{ matrix.preset }})
+        if: matrix.preset == 'gcc-debug'
+        run: |
+          build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake --build --preset ${{ matrix.preset }}
+
+      - name: Build (${{ matrix.preset }})
+        if: matrix.preset == 'clang-debug'
+        run: cmake --build --preset ${{ matrix.preset }}
+
+      - name: Run tests (${{ matrix.preset }})
+        run: ctest --preset ${{ matrix.preset }} --output-on-failure
+      
+      - name: Generate coverage report
+        if: matrix.preset == 'DISABLED_gcc-debug'
+        run: |
+          gcovr -r . \
+            --exclude-directories build/_deps \
+            --exclude-unreachable-branches \
+            --exclude CMakeFiles/* \
+            --exclude CMakeCXXCompilerId.cpp \
+            --print-summary \
+            --sonarqube \
+            --output coverage.xml
+
+      - name: SonarQube Scan
+        if: matrix.preset == 'gcc-debug'
+        uses: SonarSource/sonarqube-scan-action@v5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            --define sonar.cfamily.compile-commands=${{ env.BUILD_WRAPPER_OUT_DIR }}/compile_commands.json
