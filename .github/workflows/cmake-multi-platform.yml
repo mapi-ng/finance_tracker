@@ -30,11 +30,11 @@ jobs:
         run: |
           echo "Conan profiles directory: $CONAN_PROFILES_DIR"
 
-      - name: Configure with CMake preset (${{ matrix.preset }})
-        run: cmake --preset ${{ matrix.preset }}
-
       - name: Install Build Wrapper
         uses: SonarSource/sonarqube-scan-action/install-build-wrapper@v5
+
+      - name: Configure with CMake preset (${{ matrix.preset }})
+        run: cmake --preset ${{ matrix.preset }}
 
       - name: Build (${{ matrix.preset }})
         if: matrix.preset == 'gcc-debug'
