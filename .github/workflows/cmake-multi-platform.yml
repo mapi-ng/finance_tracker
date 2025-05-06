@@ -52,10 +52,9 @@ jobs:
         if: matrix.preset == 'gcc-debug'
         run: |
           gcovr -r . \
-            --exclude-directories build/_deps \
             --exclude-unreachable-branches \
-            --exclude CMakeFiles/* \
-            --exclude CMakeCXXCompilerId.cpp \
+            -e '.*/CMakeFiles.*' \
+            -e '.*/test.*' \
             --print-summary \
             --sonarqube \
             --output coverage.xml
