@@ -33,3 +33,11 @@ TEST_F(ImporterTest, CSVImporterImport) {
   ASSERT_TRUE(importer_);
   EXPECT_TRUE(importer_->import().empty());
 }
+
+TEST_F(ImporterTest, CSVImporterWithConfig) {
+  storage::CSVConfig config{.delimiter = ';', .has_header = true};
+
+  importer_ = std::make_shared<storage::CSVImporter>("test.csv", config);
+  ASSERT_TRUE(importer_);
+  EXPECT_TRUE(importer_->import().empty());
+}
