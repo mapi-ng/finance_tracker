@@ -10,6 +10,8 @@ target_link_libraries(test_importer
 
 add_test(NAME test_importer COMMAND test_importer)
 
+message(WARNING "CURRENT CMAKE_COMMAND: ${CMAKE_COMMAND}")
+
 add_custom_command(
     TARGET test_importer
     POST_BUILD
