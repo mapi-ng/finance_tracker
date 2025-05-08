@@ -15,8 +15,9 @@ class ImporterTest : public ::testing::Test {
   std::shared_ptr<storage::Importer> importer_;
 };
 
-TEST_F(ImporterTest, CSVImporterDestructor) {
-  importer_ = std::make_shared<storage::CSVImporter>("test.csv");
+TEST_F(ImporterTest, CSVImporterConstruction) {
+  ASSERT_NO_THROW(importer_ =
+                      std::make_shared<storage::CSVImporter>("test.csv"));
   ASSERT_TRUE(importer_);
   EXPECT_NO_THROW(importer_.reset());
 }
@@ -25,4 +26,10 @@ TEST_F(ImporterTest, CSVImporterInvalidPath) {
   EXPECT_THROW(
       importer_ = std::make_shared<storage::CSVImporter>("invalid_path.csv"),
       storage::ImporterException);
+}
+
+TEST_F(ImporterTest, CSVImporterImport) {
+  importer_ = std::make_shared<storage::CSVImporter>("test.csv");
+  ASSERT_TRUE(importer_);
+  EXPECT_TRUE(importer_->import().empty());
 }
