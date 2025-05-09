@@ -20,7 +20,7 @@ export class CSVImporter : public Importer {
   explicit CSVImporter(const std::filesystem::path &file_path,
                        const CSVConfig &config = {});
   ~CSVImporter() override = default;
-  std::vector<core::Transaction> import() override;
+  std::vector<core::Transaction> read() override;
 };
 
 }  // namespace storage

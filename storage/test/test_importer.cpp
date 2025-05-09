@@ -31,7 +31,7 @@ TEST_F(ImporterTest, CSVImporterInvalidPath) {
 TEST_F(ImporterTest, CSVImporterImport) {
   importer_ = std::make_shared<storage::CSVImporter>("test.csv");
   ASSERT_TRUE(importer_);
-  EXPECT_TRUE(importer_->import().empty());
+  EXPECT_TRUE(importer_->read().empty());
 }
 
 TEST_F(ImporterTest, CSVImporterWithConfig) {
@@ -39,5 +39,5 @@ TEST_F(ImporterTest, CSVImporterWithConfig) {
 
   importer_ = std::make_shared<storage::CSVImporter>("test.csv", config);
   ASSERT_TRUE(importer_);
-  EXPECT_TRUE(importer_->import().empty());
+  EXPECT_TRUE(importer_->read().empty());
 }
