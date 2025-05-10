@@ -2,7 +2,7 @@ module;
 #include <filesystem>
 #include <map>
 #include <vector>
-export module CSVImporter;
+export module CSVReader;
 
 namespace storage {
 
@@ -18,9 +18,9 @@ export struct CSVConfig {
   bool has_header = true;
 };
 
-export class CSVImporter {
+export class CSVReader {
  public:
-  explicit CSVImporter(const std::filesystem::path &file_path,
+  explicit CSVReader(const std::filesystem::path &file_path,
                        const CSVConfig &config = {});
   [[nodiscard]] std::vector<CSVRow> read() const;
 

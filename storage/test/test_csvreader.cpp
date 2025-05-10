@@ -1,48 +1,48 @@
 #include <gtest/gtest.h>
 
-import CSVImporter;
+import CSVReader;
 
 TEST(CSVImporterTest, Construction) {
-  std::shared_ptr<storage::CSVImporter> importer;
-  ASSERT_NO_THROW(importer = std::make_shared<storage::CSVImporter>(
+  std::shared_ptr<storage::CSVReader> reader;
+  ASSERT_NO_THROW(reader = std::make_shared<storage::CSVReader>(
                       "test-data/test-single-record-comma.csv"));
-  ASSERT_TRUE(importer);
-  EXPECT_NO_THROW(importer.reset());
+  ASSERT_TRUE(reader);
+  EXPECT_NO_THROW(reader.reset());
 }
 
 TEST(CSVImporterTest, InvalidPath) {
-  EXPECT_THROW(storage::CSVImporter importer("invalid_path.csv"),
+  EXPECT_THROW(storage::CSVReader reader("invalid_path.csv"),
                storage::CSVImporterException);
 }
 
 TEST(CSVImporterTest, ImportWithDefaultConfig) {
-  const storage::CSVImporter importer("test-data/test-single-record-comma.csv");
+  const storage::CSVReader reader("test-data/test-single-record-comma.csv");
   // Headers contain commas, so inconsistent number of columns is expected
-  EXPECT_THROW(importer.read(), storage::CSVImporterException);
+  EXPECT_THROW(std::ignore = reader.read(), storage::CSVImporterException);
 }
 
 TEST(CSVImporterTest, ImportWithCustomConfig) {
-  const storage::CSVImporter importer("test-data/test-single-record.csv",
+  const storage::CSVReader reader("test-data/test-single-record.csv",
                                       {.delimiter = ';'});
-  const auto &results = importer.read();
+  const auto &results = reader.read();
   EXPECT_EQ(results.size(), 1);
 }
 
 TEST(csviMPorterTest, ImportOnlyHeader) {
-  const storage::CSVImporter importer("test-data/test-only-header.csv",
+  const storage::CSVReader reader("test-data/test-only-header.csv",
                                       {.delimiter = ';'});
-  const auto &results = importer.read();
+  const auto &results = reader.read();
   EXPECT_TRUE(results.empty());
 }
 
 TEST(CSVImporterTest, ImportWithoutHeader) {
-  const storage::CSVImporter importerWrongConfig(
+  const storage::CSVReader readerWrongConfig(
       "test-data/test-no-header.csv", {.delimiter = ';', .has_header = true});
-  EXPECT_TRUE(importerWrongConfig.read().empty());
+  EXPECT_TRUE(readerWrongConfig.read().empty());
 
-  const storage::CSVImporter importer("test-data/test-no-header.csv",
+  const storage::CSVReader reader("test-data/test-no-header.csv",
                                       {.delimiter = ';', .has_header = false});
-  const auto &results = importer.read();
+  const auto &results = reader.read();
   EXPECT_FALSE(results.empty());
 
   const storage::CSVRow row{
