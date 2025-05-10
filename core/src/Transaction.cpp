@@ -9,7 +9,7 @@ namespace core {
 export class Transaction {
  public:
   using Timestamp = std::chrono::system_clock::time_point;
-  Transaction(unsigned int amount,
+  explicit Transaction(unsigned int amount,
               Timestamp timestamp = Timestamp::clock::now())
       : amount_{amount}, timestamp_{timestamp} {}
 
