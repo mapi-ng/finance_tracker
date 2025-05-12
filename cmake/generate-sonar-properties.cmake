@@ -15,6 +15,8 @@ sonar.projectVersion=${GIT_VERSION_ROOT}
 
 sonar.sources=.
 sonar.sourceEncoding=UTF-8
+sonar.test.inclusions=**/test/**
 
 sonar.cfamily.enableModules=true
+sonar.test.inclusions=**/test/**
 ")
