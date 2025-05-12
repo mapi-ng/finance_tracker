@@ -5,10 +5,7 @@ add_library(core)
 target_sources(core
     PUBLIC
     FILE_SET cxx_modules_public TYPE CXX_MODULES
-    FILES src/Transaction.cpp src/TransactionMapper.cpp
-
-    PRIVATE
-    src/TransactionMapper_impl.cpp
+    FILES src/Transaction.cpp src/TransactionBuilder.cpp
 )
 
 target_link_libraries(core PRIVATE
