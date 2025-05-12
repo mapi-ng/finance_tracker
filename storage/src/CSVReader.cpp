@@ -6,7 +6,7 @@ export module CSVReader;
 
 namespace storage {
 
-export using CSVRow = std::map<std::string, std::string>;
+export using CSVRow = std::map<std::string, std::string, std::less<>>;
 
 export class CSVImporterException : public std::runtime_error {
  public:
@@ -21,7 +21,7 @@ export struct CSVConfig {
 export class CSVReader {
  public:
   explicit CSVReader(const std::filesystem::path &file_path,
-                       const CSVConfig &config = {});
+                     const CSVConfig &config = {});
   [[nodiscard]] std::vector<CSVRow> read() const;
 
  private:
