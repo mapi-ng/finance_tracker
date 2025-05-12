@@ -17,5 +17,4 @@ sonar.sources=.
 sonar.sourceEncoding=UTF-8
 
 sonar.cfamily.enableModules=true
-sonar.cfamily.gcov.reportsPath=coverage.xml
 ")
