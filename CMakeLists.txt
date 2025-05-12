@@ -11,6 +11,7 @@ endif()
 
 # Create version header and CMake variable
 include(cmake/versionize.cmake)
+include(cmake/generate-sonar-properties.cmake)
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -30,3 +31,4 @@ include(cmake/find-conan-toolchain.cmake)
 include(CTest)
 add_subdirectory(core)
 add_subdirectory(utils)
+add_subdirectory(storage)
