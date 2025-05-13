@@ -1,8 +1,10 @@
 module;
 #include <uuid.h>
+#include <filesystem>
 export module Transaction;
 
 import Utils;
+import CSVReader;
 
 namespace core {
 
@@ -55,6 +57,16 @@ class TransactionBuilder {
 
  private:
   Transaction transaction_;
+};
+
+export class TransactionMapper {
+ public:
+  explicit TransactionMapper(const std::filesystem::path& map_file_path);
+  std::vector<Transaction> map(const std::vector<storage::CSVRow>& rows);
+
+ private:
+  std::vector<std::string> date_formats_;
+  std::unordered_map<std::string, std::vector<std::string>> config_;
 };
 
 }  // namespace core

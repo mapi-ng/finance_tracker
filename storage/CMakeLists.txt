@@ -16,7 +16,6 @@ target_link_libraries(storage PRIVATE
     spdlog::spdlog
     stduuid::stduuid
     utils
-    core
 )
 
 add_subdirectory(test)
