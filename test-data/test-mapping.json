@@ -1,12 +1,33 @@
 {
   "date_formats": [
-    "%Y-%m-%d",
-    "%d-%m-%Y",
-    "%d/%m/%Y"
+    {
+      "format": "%Y-%m-%d",
+      "regex": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    {
+      "format": "%d-%m-%Y",
+      "regex": "^\\d{2}-\\d{2}-\\d{4}$"
+    },
+    {
+      "format": "%d/%m/%Y",
+      "regex": "^\\d{2}/\\d{2}/\\d{4}$"
+    }
   ],
   "mapping": {
-    "date": ["Transaction Date", "DATE"],
-    "description": ["Description", "ACTIVITY NAME"],
-    "amount": ["Credit", "Debit"]
+    "date": [
+      "dateOp",
+      "Transaction Date",
+      "DATE"
+    ],
+    "description": [
+      "desc",
+      "Description",
+      "ACTIVITY NAME"
+    ],
+    "amount": [
+      "Amount",
+      "Credit",
+      "Debit"
+    ]
   }
 }

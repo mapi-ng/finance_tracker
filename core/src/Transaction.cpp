@@ -1,5 +1,6 @@
 module;
 #include <uuid.h>
+
 #include <filesystem>
 export module Transaction;
 
@@ -14,11 +15,11 @@ export class Transaction {
  public:
   using Date = std::chrono::year_month_day;
 
-  uuids::uuid getId() const { return id_; }
-  Date getDate() const { return date_; }
-  unsigned int getAmount() const { return amount_; }
-  std::string getDescription() const { return description_; }
-  std::string getCategory() const { return category_; }
+  [[nodiscard]] uuids::uuid getId() const { return id_; }
+  [[nodiscard]] Date getDate() const { return date_; }
+  [[nodiscard]] unsigned int getAmount() const { return amount_; }
+  [[nodiscard]] std::string getDescription() const { return description_; }
+  [[nodiscard]] std::string getCategory() const { return category_; }
 
   void setDescription(std::string_view description) {
     description_ = description;
@@ -43,12 +44,12 @@ class TransactionBuilder {
   TransactionBuilder(const Transaction::Date& date, unsigned int amount)
       : transaction_{date, amount} {}
 
-  TransactionBuilder& description(const std::string &value) {
+  TransactionBuilder& description(const std::string& value) {
     transaction_.description_ = value;
     return *this;
   }
 
-  TransactionBuilder& category(const std::string &value) {
+  TransactionBuilder& category(const std::string& value) {
     transaction_.category_ = value;
     return *this;
   }
@@ -62,11 +63,13 @@ class TransactionBuilder {
 export class TransactionMapper {
  public:
   explicit TransactionMapper(const std::filesystem::path& map_file_path);
-  std::vector<Transaction> map(const std::vector<storage::CSVRow>& rows);
+  ~TransactionMapper();
+  [[nodiscard]] std::vector<Transaction> map(
+      const std::vector<storage::CSVRow>& rows) const;
 
  private:
-  std::vector<std::string> date_formats_;
-  std::unordered_map<std::string, std::vector<std::string>> config_;
+  class TransactionMapperImpl;
+  std::unique_ptr<TransactionMapperImpl> impl_{};
 };
 
 }  // namespace core
