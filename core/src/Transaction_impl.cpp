@@ -20,13 +20,23 @@ class TransactionMapper::TransactionMapperImpl {
 
  public:
   explicit TransactionMapperImpl(const std::filesystem::path& map_file_path) {
-    std::ifstream file(map_file_path);
-    if (!file) {
-      throw std::runtime_error("Failed to open file: "
-                               + map_file_path.string());
-    }
+    try {
+      std::ifstream file(map_file_path);
+      if (!file) {
+        throw std::runtime_error("Failed to open file: "
+                                 + map_file_path.string());
+      }
 
-    file >> config_;
+      file >> config_;
+    } catch (const std::ios_base::failure &e) {
+      throw std::runtime_error("Failed to read file: "
+                               + map_file_path.string() + ": " + e.what());
+    } catch (const json::parse_error &e) {
+      throw std::runtime_error("Failed to parse JSON: "
+                               + map_file_path.string() + ": " + e.what());
+    } catch (const std::exception &e) {
+      throw std::runtime_error("Error: " + std::string(e.what()));
+    }
   }
 
   std::chrono::year_month_day tryParseDate(const std::string& input) {
@@ -71,7 +81,6 @@ class TransactionMapper::TransactionMapperImpl {
   }
 
   std::vector<Transaction> map(const std::vector<storage::CSVRow>& rows) {
-
     std::vector<Transaction> transactions;
 
     for (const auto& row : rows) {
