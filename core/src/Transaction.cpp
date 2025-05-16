@@ -72,4 +72,10 @@ export class TransactionMapper {
   std::unique_ptr<TransactionMapperImpl> impl_{};
 };
 
+export class TransactionParsingError : public std::runtime_error {
+ public:
+  explicit TransactionParsingError(const std::string& message)
+      : std::runtime_error(message) {}
+};
+
 }  // namespace core

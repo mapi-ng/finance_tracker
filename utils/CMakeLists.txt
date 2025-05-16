@@ -4,7 +4,9 @@ add_library(utils)
 target_sources(utils
     PUBLIC
     FILE_SET cxx_modules_public TYPE CXX_MODULES
-    FILES src/uuid_utils.cpp
+    FILES
+    src/uuid_utils.cpp
+    src/Exceptions.cpp
 )
 
 target_link_libraries(utils PRIVATE

@@ -5,6 +5,8 @@ module;
 #include <regex>
 module Transaction;
 
+import Exceptions;
+
 namespace core {
 
 /**
@@ -20,21 +22,15 @@ class TransactionMapper::TransactionMapperImpl {
 
  public:
   explicit TransactionMapperImpl(const std::filesystem::path& map_file_path) {
+    std::ifstream file(map_file_path);
+    if (!file) {
+      throw utils::FailedToOpenFile(map_file_path, "File handle is invalid.");
+    }
     try {
-      std::ifstream file(map_file_path);
-      if (!file) {
-        throw std::runtime_error("Failed to open file: "
-                                 + map_file_path.string());
-      }
-
       file >> config_;
-    } catch (const std::ios_base::failure &e) {
-      throw std::runtime_error("Failed to read file: "
-                               + map_file_path.string() + ": " + e.what());
-    } catch (const json::parse_error &e) {
-      throw std::runtime_error("Failed to parse JSON: "
-                               + map_file_path.string() + ": " + e.what());
-    } catch (const std::exception &e) {
+    } catch (const json::parse_error& e) {
+      throw utils::FailedToParseJson(map_file_path, e.what());
+    } catch (const std::exception& e) {
       throw std::runtime_error("Error: " + std::string(e.what()));
     }
   }
@@ -50,7 +46,7 @@ class TransactionMapper::TransactionMapperImpl {
         }
       }
     }
-    throw std::runtime_error("Failed to parse date: " + input);
+    throw TransactionParsingError("Failed to parse date: " + input);
   }
 
   template<typename T>
@@ -88,8 +84,8 @@ class TransactionMapper::TransactionMapperImpl {
       auto amount = tryFirstMatchingColumnValue<unsigned int>("amount", row);
 
       if (!date_str.has_value() || !amount.has_value()) {
-        throw std::runtime_error("Missing required fields in row: "
-                                 + nlohmann::json(row).dump());
+        throw TransactionParsingError("Missing required fields in row: "
+                                      + nlohmann::json(row).dump());
       }
 
       auto date = tryParseDate(date_str.value());
