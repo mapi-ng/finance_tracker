@@ -6,15 +6,12 @@ export module Utils;
 
 namespace utils {
 
+static constexpr uuids::uuid UUID_NAMESPACE =
+    uuids::uuid::from_string("e4f1c92a-d397-4ed9-aee6-3df3f5363d2e").value();
+
 export uuids::uuid generateUuidFromData(std::string_view data_string) {
-  constexpr std::hash<std::string> hasher;
-  const auto hash = hasher(std::string(data_string));
-
-  std::array<uint8_t, 16> bytes{};
-  std::memcpy(bytes.data(), &hash,
-              std::min(sizeof(hash), static_cast<size_t>(16)));
-
-  return {bytes};
+  uuids::uuid_name_generator uuid_v5_generator(UUID_NAMESPACE);
+  return uuid_v5_generator(data_string);
 }
 
 export uuids::uuid generateUuid() {
