@@ -40,7 +40,7 @@ export class Transaction {
     }
   }
 
-  const uuids::uuid id_{utils::generateUuid()};
+  uuids::uuid id_;
   Date date_;
   unsigned int amount_;
   std::string description_;
@@ -70,7 +70,12 @@ class TransactionBuilder {
     return *this;
   }
 
-  Transaction build() { return std::move(transaction_); }
+  Transaction build() {
+    transaction_.id_ = utils::generateUuidFromData(
+        std::format("{}{}{}{}", transaction_.date_, transaction_.amount_,
+                    transaction_.description_, transaction_.category_));
+    return std::move(transaction_);
+  }
 
  private:
   Transaction transaction_;
