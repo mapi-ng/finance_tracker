@@ -1,26 +1,36 @@
 module;
 #include <filesystem>
+#include <map>
 #include <vector>
 export module CSVImporter;
-export import Importer;
 
 namespace storage {
 
+export using CSVRow = std::map<std::string, std::string>;
+
+export class CSVImporterException : public std::runtime_error {
+ public:
+  explicit CSVImporterException(const std::string &message)
+      : std::runtime_error("CSV Importer Error: " + message) {}
+};
 export struct CSVConfig {
   char delimiter = ',';
   bool has_header = true;
 };
 
-export class CSVImporter : public Importer {
+export class CSVImporter {
+ public:
+  explicit CSVImporter(const std::filesystem::path &file_path,
+                       const CSVConfig &config = {});
+  [[nodiscard]] std::vector<CSVRow> read() const;
+
  private:
   std::filesystem::path file_path_;
   CSVConfig config_;
 
- public:
-  explicit CSVImporter(const std::filesystem::path &file_path,
-                       const CSVConfig &config = {});
-  ~CSVImporter() override = default;
-  std::vector<core::Transaction> read() override;
+  [[nodiscard]] std::vector<std::string> populateHeaders(
+      const std::vector<std::string> &tokens) const;
+  [[nodiscard]] std::vector<std::string> split(const std::string &line) const;
 };
 
 }  // namespace storage

@@ -6,7 +6,6 @@ target_sources(storage
     PUBLIC
     FILE_SET cxx_modules_public TYPE CXX_MODULES
     FILES
-    src/Importer.cpp
     src/CSVImporter.cpp
 
     PRIVATE
