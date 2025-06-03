@@ -5,7 +5,7 @@ add_library(core)
 target_sources(core
 PUBLIC
     FILE_SET cxx_modules_public TYPE CXX_MODULES
-    FILES src/Transaction.ixx
+    FILES src/Transaction.cpp
 )
 
 target_link_libraries(core PRIVATE 
