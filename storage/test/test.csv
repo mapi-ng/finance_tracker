@@ -1,0 +1,18 @@
+DATE;ACTIVITY TYPE;ACTIVITY NAME;DEBIT;DEBIT CURRENCY;CREDIT;CREDIT CURRENCY;CARD NUMBER;LOCALITY;RECIPIENT;SENDER;FEES/COMMISSION;BUY/SELL;QUANTITY;ASSET;PRICE PER UNIT
+28/01/2015;REWARD_RECEIVED;"""First deposit bonus""";;;;;;;;;;;250;SWQ;
+12/01/2025;CARD_TRANSACTION_OUT;"""Groceries shop""";-79.6;CHF;;;**** 1234;"""Geneva, CH""";"""Denner""";;0;;;;
+19/03/2024;REWARD_RECEIVED;"""Card bonus""";;;;;;;;;;;1;SWQ;
+20/06/2024;PAYMENT_TRANSACTION_IN;"""Transfer from Jack""";;;1200;CHF;;;;"""John Doe""";0;;;;
+05/02/2025;PAYMENT_TRANSACTION_OUT;"""Transfer to Mobile Provider""";-21.7;CHF;;;;;"""Sunrise GmbH""";;0;;;;
+14/02/2025;PAYMENT_TRANSACTION_IN;"""Transfer from Employer""";;;5400.45;CHF;;;;"""Employer""";0;;;;
+16/02/2024;GOAL_DEPOSIT;"""Deposit to «Emergency»""";;;1000;CHF;;;"""Emergency""";;;;;;
+13/04/2025;PAYMENT_TRANSACTION_OUT;"""Transfer to Office""";-105;CHF;;;;;"""Office""";;0;;;;
+15/03/2025;PAYMENT_TRANSACTION_OUT;"""Twint to Transport Company""";-26.5;CHF;;;;;"""Transport Company""";;0;;;;
+17/04/2025;PAYMENT_TRANSACTION_OUT;"""Standing order to Landlord""";-1620;CHF;;;;;"""Landlord""";;0;;;;
+17/03/2025;REWARD_RECEIVED;"""Card bonus""";;;;;;;;;;;1;SWQ;
+07/04/2025;CARD_TRANSACTION_OUT;"""Galaxus""";-50.7;CHF;;;**** 1234;"""Zürich, CH""";"""Galaxus""";;0;;;;
+13/02/2024;BANK_AUTO_ORDER_EXECUTED;"""Autoexchange Swiss francs""";-238.75;CHF;271.34;USD;;;;;2.25;;;;0.879884
+03/08/2025;INVEST_ORDER_EXECUTED;"""1,500x Algorand""";-271.34;USD;;;;;;;2.69;BUY;1500;ALG;0.1791
+23/09/2025;INVEST_ORDER_EXECUTED;"""4,000x Algorand""";;;860.51;USD;;;;;8.69;SELL;4000;ALG;0.2173
+28/04/2025;GOAL_DEPOSIT;"""Deposit to «Emergency»""";;;4000;CHF;;;"""Emergency""";;;;;;
+14/02/2024;PAYMENT_TRANSACTION_IN;"""Transfer from Employer""";;;5400.45;CHF;;;;"""Employer""";0;;;;
