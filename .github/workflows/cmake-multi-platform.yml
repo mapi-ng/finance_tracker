@@ -1,5 +1,3 @@
-# This starter workflow is for a CMake project running on multiple platforms. There is a different starter workflow if you just want a single platform.
-# See: https://github.com/actions/starter-workflows/blob/main/ci/cmake-single-platform.yml
 name: CMake Build
 
 on:
@@ -9,8 +7,8 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
-    name: cmake build and test
+  build-ubuntu:
+    name: CMake build and test for Ubuntu
     runs-on: ubuntu-latest
     container: maping4/ubuntu_cpp:latest
 
@@ -63,3 +61,30 @@ jobs:
         with:
           args: >
             --define sonar.cfamily.compile-commands=${{ env.BUILD_WRAPPER_OUT_DIR }}/compile_commands.json
+
+  build-windows:
+    name: CMake build and test for Windows
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        preset: [msvc-debug]
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Before build
+        run: |
+          echo "Conan profiles directory: $CONAN_PROFILES_DIR"
+
+      - name: Configure with CMake preset (${{ matrix.preset }})
+        run: cmake --preset ${{ matrix.preset }}
+
+      - name: Build (${{ matrix.preset }})
+        run: cmake --build --preset ${{ matrix.preset }}
+
+      - name: Run tests (${{ matrix.preset }})
+        run: ctest --preset ${{ matrix.preset }} --output-on-failure
