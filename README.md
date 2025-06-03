@@ -1,40 +1,35 @@
 # Finance Tracker
+
 ![Build](https://github.com/mapi-ng/finance_tracker/actions/workflows/cmake-multi-platform.yml/badge.svg) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=mapi-ng_finance_tracker&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=mapi-ng_finance_tracker)
+
+## Description
+
+Simple budgeting application for tracking personal expenses and income.
+
+The side purpose of this project is to learn using C++ modules
+and put in practice general knowledge of modern C++.
 
 ## Prerequisites
 
-Conan package manager
-To install Conan, follow these steps:
+### Development in Docker container
 
-1. Make sure Python is installed.
+Project can be opened using VSCode development containers plugin,
+using the following image:
+[maping4/ubuntu_cpp](https://hub.docker.com/repository/docker/maping4/ubuntu_cpp/general)
 
-2. Install Conan using pip:
-    ```
-    pipx install conan
-    ```
+### Standalone configuration requirements
 
-3. Verify the installation:
-    ```
-    conan --version
-    ```
-4. Detect Conan profile (optional)
-    ```
-    conan profile detect --force
-    ```
-5. Install packages from Conanfile.txt using provided profiles.
-    ```
-    cd conan-profiles
-    ./conan-packages-installer.sh
-    ```
-    Script will install packages for preset configurations.
+For full configuration refer to [Dockerfile](https://github.com/mapi-ng/docker_files/blob/main/ubuntu_cpp/Dockerfile)
 
 ## Configuring, building and testing
 
-Following commands will configure, build and run tests for the project based on the specified preset from `CMakePresets.json`
+Following commands will configure, build and run tests for the project based on the specified preset from
+`CMakePresets.json`
 
 ```
 cmake --preset [preset]
 cmake --build --preset [preset]
+ctest --preset [preset] --output-on-failure
 ```
 
 For example:
@@ -42,4 +37,5 @@ For example:
 ```
 cmake --preset gcc-debug
 cmake --build --preset gcc-debug
+ctest --preset gcc-debug --output-on-failure
 ```
