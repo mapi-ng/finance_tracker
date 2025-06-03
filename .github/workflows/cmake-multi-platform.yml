@@ -53,13 +53,7 @@ jobs:
       - name: Generate coverage report
         if: matrix.preset == 'gcc-debug'
         run: |
-          gcovr -r . \
-            --exclude-unreachable-branches \
-            -e '.*/CMakeFiles.*' \
-            -e '.*/test.*' \
-            --print-summary \
-            --sonarqube \
-            --output coverage.xml
+          ./scripts/run-coverage.sh
 
       - name: SonarQube Scan
         if: matrix.preset == 'gcc-debug'
