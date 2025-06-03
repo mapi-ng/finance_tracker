@@ -9,6 +9,8 @@ using namespace std::literals::chrono_literals;
 
 TEST(TransactionMapperTest, Construction) {
   ASSERT_THROW(core::TransactionMapper("invalid-path.json"),
+  std::runtime_error);
+  ASSERT_THROW(core::TransactionMapper("test-data/test-mapping-bad.json"),
                std::runtime_error);
   ASSERT_NO_THROW(
       core::TransactionMapper transactionMapper("test-data/test-mapping.json"));
@@ -16,7 +18,7 @@ TEST(TransactionMapperTest, Construction) {
 
 TEST(TransactionMapperTest, Map) {
   core::TransactionMapper transactionMapper("test-data/test-mapping.json");
-  std::vector<storage::CSVRow> rows = {
+  std::vector rows = {
       storage::CSVRow{{"DATE", "2023-10-13"},
                       {"Credit", "100"},
                       {"Description", "Test"}},
@@ -37,4 +39,34 @@ TEST(TransactionMapperTest, Map) {
     EXPECT_EQ(transaction.getAmount(), 100);
     EXPECT_EQ(transaction.getDescription(), "Test");
   }
+}
+
+TEST(TransactionMapperTest, WrongDateFormat) {
+  core::TransactionMapper transactionMapper("test-data/test-mapping.json");
+  std::vector rows = {
+      storage::CSVRow{{"dateOp", "2023/10/13"},
+                      {"Amount", "100"},
+                      {"desc", "Test"}}};
+
+  ASSERT_THROW(std::ignore = transactionMapper.map(rows), std::runtime_error);
+}
+
+TEST(TransactionMapperTest, DateNoMapping) {
+  core::TransactionMapper transactionMapper("test-data/test-mapping.json");
+  std::vector rows = {
+    storage::CSVRow{{"unsupportedDateColumn", "13-10-2023"},
+                    {"Amount", "100"},
+                    {"desc", "Test"}}};
+
+  ASSERT_THROW(std::ignore = transactionMapper.map(rows), std::runtime_error);
+}
+
+TEST(TransactionMapperTest, AmountNoMapping) {
+  core::TransactionMapper transactionMapper("test-data/test-mapping.json");
+  std::vector rows = {
+    storage::CSVRow{{"dateOp", "13-10-2023"},
+                    {"unsupportedAmountColumn", "100"},
+                    {"desc", "Test"}}};
+
+  ASSERT_THROW(std::ignore = transactionMapper.map(rows), std::runtime_error);
 }

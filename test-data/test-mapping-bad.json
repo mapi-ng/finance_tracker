@@ -1,0 +1,7 @@
+{
+  date_formats": [
+    {
+      "regex": "*"
+    }
+  ]
+}
