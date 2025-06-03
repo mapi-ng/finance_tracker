@@ -32,14 +32,17 @@ jobs:
       - name: Configure with CMake preset (${{ matrix.preset }})
         run: cmake --preset ${{ matrix.preset }}
 
+      - name: Install Build Wrapper
+        uses: SonarSource/sonarqube-scan-action/install-build-wrapper@v5
+
       - name: Build (${{ matrix.preset }})
-        run: cmake --build --preset ${{ matrix.preset }}
+        run: build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake --build --preset ${{ matrix.preset }}
 
       - name: Run tests (${{ matrix.preset }})
         run: ctest --preset ${{ matrix.preset }} --output-on-failure
       
       - name: Generate coverage report
-        if: matrix.preset == 'gcc-debug'
+        if: matrix.preset == 'DISABLED_gcc-debug'
         run: |
           gcovr -r . \
             --exclude-directories build/_deps \
@@ -47,3 +50,12 @@ jobs:
             --print-summary \
             --sonarqube \
             --output coverage.xml
+
+      - name: SonarQube Scan
+        if: matrix.preset == 'gcc-debug'
+        uses: SonarSource/sonarqube-scan-action@v5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            --define sonar.cfamily.compile-commands="${{ env.BUILD_WRAPPER_OUT_DIR }}/compile_commands.json"
