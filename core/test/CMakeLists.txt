@@ -15,6 +15,7 @@ add_executable(test_transactionmapper test_transactionmapper.cpp)
 target_link_libraries(test_transactionmapper
     PRIVATE
     GTest::gtest_main
+    core
     storage
 )
 

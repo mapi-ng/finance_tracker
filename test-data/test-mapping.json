@@ -1,0 +1,12 @@
+{
+  "date_formats": [
+    "%Y-%m-%d",
+    "%d-%m-%Y",
+    "%d/%m/%Y"
+  ],
+  "mapping": {
+    "date": ["Transaction Date", "DATE"],
+    "description": ["Description", "ACTIVITY NAME"],
+    "amount": ["Credit", "Debit"]
+  }
+}
