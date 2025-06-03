@@ -22,10 +22,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Temporarily move conan packages to current source directory
+      - name: Before build
         run: |
           git config --global safe.directory '*'
           export CONAN_PROFILES_DIR=/conan-profiles
+          echo "Conan profiles directory: $CONAN_PROFILES_DIR"
 
       - name: Configure with CMake preset (${{ matrix.preset }})
         run: cmake --preset ${{ matrix.preset }}
