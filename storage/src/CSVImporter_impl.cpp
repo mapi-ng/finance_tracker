@@ -16,7 +16,7 @@ CSVImporter::CSVImporter(const std::filesystem::path &file_path,
   }
 }
 
-std::vector<core::Transaction> CSVImporter::import() {
+std::vector<core::Transaction> CSVImporter::read() {
   return {};
 }
 
