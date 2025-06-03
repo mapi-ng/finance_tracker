@@ -1,4 +1,5 @@
 find_package(spdlog REQUIRED)
+find_package(stduuid REQUIRED)
 
 add_library(core)
 target_sources(core PUBLIC
@@ -8,6 +9,8 @@ target_sources(core PUBLIC
 
 target_link_libraries(core PRIVATE 
     spdlog::spdlog
+    stduuid::stduuid
+    utils
 )
 
 add_executable(finance_tracker src/main.cpp)
