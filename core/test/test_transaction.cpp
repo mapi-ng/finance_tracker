@@ -15,9 +15,25 @@ class TransactionTest : public ::testing::Test {
   core::Transaction transaction{100};
 };
 
-TEST(TransactionUUID, UUIDGeneration) {
+TEST(Transaction, UUIDGeneration) {
   core::Transaction transaction(100);
   EXPECT_FALSE(transaction.getId().is_nil());
+}
+
+TEST(Transaction, TimestampDefault) {
+  auto before = std::chrono::system_clock::now();
+  core::Transaction transaction(1);
+  auto after = std::chrono::system_clock::now();
+  auto timestamp = transaction.getTimestamp();
+  EXPECT_GE(timestamp, before);
+  EXPECT_LE(timestamp, after);
+}
+
+TEST(Transaction, TimestampExplicit) {
+  auto arbitraryTimestamp =
+      std::chrono::system_clock::now() - std::chrono::hours(24);
+  core::Transaction transaction(1, arbitraryTimestamp);
+  EXPECT_EQ(transaction.getTimestamp(), arbitraryTimestamp);
 }
 
 TEST_F(TransactionTest, ParameterizedConstructor) {
