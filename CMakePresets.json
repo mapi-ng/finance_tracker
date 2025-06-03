@@ -7,7 +7,7 @@
     },
     "configurePresets": [
         {
-            "name": "base-gcc",
+            "name": "gcc-base",
             "hidden": true,
             "description": "Base configuration for GCC 64-bit builds",
             "generator": "Ninja",
@@ -20,7 +20,7 @@
             }
         },
         {
-            "name": "base-clang",
+            "name": "clang-base",
             "hidden": true,
             "description": "Base configuration for GCC 64-bit builds",
             "generator": "Ninja",
@@ -33,7 +33,7 @@
         },
         {
             "name": "gcc-release",
-            "inherits": "base-gcc",
+            "inherits": "gcc-base",
             "description": "Configure with GCC 15 for 64-bit release build",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release"
@@ -41,7 +41,7 @@
         },
         {
             "name": "gcc-debug",
-            "inherits": "base-gcc",
+            "inherits": "gcc-base",
             "description": "Configure with GCC 15 for 64-bit debug build",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug"
@@ -49,7 +49,7 @@
         },
         {
             "name": "clang-release",
-            "inherits": "base-clang",
+            "inherits": "clang-base",
             "description": "Configure with Clang 20 for 64-bit release build",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release"
@@ -57,7 +57,7 @@
         },
         {
             "name": "clang-debug",
-            "inherits": "base-clang",
+            "inherits": "clang-base",
             "description": "Configure with Clang 20 for 64-bit debug build",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug"
