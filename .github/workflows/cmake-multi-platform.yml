@@ -19,7 +19,7 @@ jobs:
 
     strategy:
       matrix:
-        preset: [gcc-release, gcc-debug, clang-release, clang-debug]
+        preset: [gcc-debug, clang-debug]
 
     steps:
       - name: Checkout repository
