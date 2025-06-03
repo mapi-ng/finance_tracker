@@ -16,12 +16,15 @@ class TransactionTest : public ::testing::Test {
 };
 
 TEST_F(TransactionTest, BuildTransaction) {
-  auto transaction =
-      core::TransactionBuilder(date, 1).description("Test").build();
+  auto transaction = core::TransactionBuilder(date, 1)
+                         .description("Test")
+                         .category("Shopping")
+                         .build();
   EXPECT_FALSE(transaction.getId().is_nil());
   EXPECT_EQ(transaction.getAmount(), 1);
   EXPECT_EQ(transaction.getDate(), date);
   EXPECT_EQ(transaction.getDescription(), "Test");
+  EXPECT_EQ(transaction.getCategory(), "Shopping");
 
   transaction.setDescription("New test");
   EXPECT_EQ(transaction.getDescription(), "New test");

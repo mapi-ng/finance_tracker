@@ -40,15 +40,7 @@ class TransactionBuilder {
  public:
   TransactionBuilder(const Transaction::Date& date, unsigned int amount)
       : transaction_{date, amount} {}
-  TransactionBuilder& timestamp(const Transaction::Date& date) {
-    transaction_.date_ = date;
-    return *this;
-  }
 
-  TransactionBuilder& amount(unsigned int value) {
-    transaction_.amount_ = value;
-    return *this;
-  }
   TransactionBuilder& description(const std::string &value) {
     transaction_.description_ = value;
     return *this;
