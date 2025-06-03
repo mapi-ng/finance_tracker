@@ -12,20 +12,43 @@ class TransactionTest : public ::testing::Test {
   void TearDown() override {}
 
  protected:
-  std::chrono::year_month_day date{2021y, std::chrono::January, 21d};
+  std::chrono::year_month_day date_{2021y, std::chrono::January, 21d};
 };
 
 TEST_F(TransactionTest, BuildTransaction) {
-  auto transaction = core::TransactionBuilder(date, 1)
+  auto transaction = core::TransactionBuilder(date_, 1)
                          .description("Test")
                          .category("Shopping")
                          .build();
   EXPECT_FALSE(transaction.getId().is_nil());
   EXPECT_EQ(transaction.getAmount(), 1);
-  EXPECT_EQ(transaction.getDate(), date);
+  EXPECT_EQ(transaction.getDate(), date_);
   EXPECT_EQ(transaction.getDescription(), "Test");
   EXPECT_EQ(transaction.getCategory(), "Shopping");
+}
 
-  transaction.setDescription("New test");
-  EXPECT_EQ(transaction.getDescription(), "New test");
+TEST_F(TransactionTest, InvalidTransaction) {
+  // Invalid date
+  EXPECT_THROW(core::TransactionBuilder({}, 1)
+                   .description("Desc")
+                   .category("Cat")
+                   .build(),
+               core::TransactionException);
+  // Invalid amount
+  EXPECT_THROW(core::TransactionBuilder(date_, 0)
+                   .description("Desc")
+                   .category("Cat")
+                   .build(),
+               core::TransactionException);
+  // Invalid description and category
+  EXPECT_THROW(core::TransactionBuilder(date_, 1)
+                   .description("")
+                   .category("Cat")
+                   .build(),
+               core::TransactionException);
+  EXPECT_THROW(core::TransactionBuilder(date_, 1)
+                   .description("Desc")
+                   .category("")
+                   .build(),
+               core::TransactionException);
 }
