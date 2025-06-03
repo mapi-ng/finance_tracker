@@ -1,10 +1,20 @@
-add_executable(finance_tracker src/main.cpp)
-
 find_package(spdlog REQUIRED)
 
-target_link_libraries(finance_tracker PRIVATE 
+add_library(core)
+target_sources(core PUBLIC
+    FILE_SET CXX_MODULES
+    FILES src/Transaction.ixx
+)
+
+target_link_libraries(core PRIVATE 
     spdlog::spdlog
 )
-target_include_directories(finance_tracker PRIVATE include)
+
+add_executable(finance_tracker src/main.cpp)
+
+target_link_libraries(finance_tracker PRIVATE
+    core
+    spdlog::spdlog
+)
 
 add_subdirectory(test)
