@@ -3,12 +3,13 @@ find_package(stduuid REQUIRED)
 
 add_library(storage)
 target_sources(storage
-PUBLIC
+    PUBLIC
     FILE_SET cxx_modules_public TYPE CXX_MODULES
     FILES
     src/Importer.cpp
     src/CSVImporter.cpp
-PRIVATE
+
+    PRIVATE
     src/CSVImporter_impl.cpp
 )
 

@@ -3,12 +3,12 @@ find_package(stduuid REQUIRED)
 
 add_library(core)
 target_sources(core
-PUBLIC
+    PUBLIC
     FILE_SET cxx_modules_public TYPE CXX_MODULES
     FILES src/Transaction.cpp
 )
 
-target_link_libraries(core PRIVATE 
+target_link_libraries(core PRIVATE
     spdlog::spdlog
     stduuid::stduuid
     utils

@@ -2,7 +2,7 @@ find_package(stduuid REQUIRED)
 
 add_library(utils)
 target_sources(utils
-PUBLIC
+    PUBLIC
     FILE_SET cxx_modules_public TYPE CXX_MODULES
     FILES src/uuid_utils.cpp
 )
