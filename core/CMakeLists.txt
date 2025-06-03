@@ -5,12 +5,16 @@ add_library(core)
 target_sources(core
     PUBLIC
     FILE_SET cxx_modules_public TYPE CXX_MODULES
-    FILES src/Transaction.cpp
+    FILES src/Transaction.cpp src/TransactionMapper.cpp
+
+    PRIVATE
+    src/TransactionMapper_impl.cpp
 )
 
 target_link_libraries(core PRIVATE
     spdlog::spdlog
     stduuid::stduuid
+    storage
     utils
 )
 

@@ -16,7 +16,7 @@ add_custom_command(
     TARGET test_csvreader
     POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different
-    ${CMAKE_CURRENT_SOURCE_DIR}/test-data
-        $<TARGET_FILE_DIR:test_csvreader>/test-data
-    COMMENT "Copy test data to binary directory"
+    ${CMAKE_SOURCE_DIR}/test-data
+    $<TARGET_FILE_DIR:test_csvreader>/test-data
+    COMMENT "test_csvreader: Copy test data to binary directory"
 )
