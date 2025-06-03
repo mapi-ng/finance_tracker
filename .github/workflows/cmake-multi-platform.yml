@@ -24,6 +24,7 @@ jobs:
 
       - name: Temporarily move conan packages to current source directory
         run: |
+          pwd
           mv /conan-profiles .
 
       - name: Configure with CMake preset (${{ matrix.preset }})
