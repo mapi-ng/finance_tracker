@@ -8,14 +8,15 @@ on:
   pull_request:
     branches: [ "main" ]
 
-env:
-  CONAN_PROFILES_DIR: /conan-profiles
-
 jobs:
   build:
     name: cmake build and test
     runs-on: ubuntu-latest
     container: maping4/ubuntu_cpp:latest
+
+    env:
+      CONAN_PROFILES_DIR: /conan-profiles
+      BUILD_WRAPPER_OUT_DIR: build_wrapper_output_directory
 
     strategy:
       matrix:
