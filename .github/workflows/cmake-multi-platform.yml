@@ -53,6 +53,8 @@ jobs:
           gcovr -r . \
             --exclude-directories build/_deps \
             --exclude-unreachable-branches \
+            --exclude CMakeFiles/* \
+            --exclude '*CMakeCXXCompilerId.cpp' \
             --print-summary \
             --sonarqube \
             --output coverage.xml
