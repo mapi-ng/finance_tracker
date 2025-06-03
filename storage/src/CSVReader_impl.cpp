@@ -6,11 +6,11 @@ module;
 #include <fstream>
 #include <vector>
 
-module CSVImporter;
+module CSVReader;
 
 namespace storage {
 
-CSVImporter::CSVImporter(const std::filesystem::path &file_path,
+CSVReader::CSVReader(const std::filesystem::path &file_path,
                          const CSVConfig &config)
     : file_path_{file_path},
       config_{config} {
@@ -21,7 +21,7 @@ CSVImporter::CSVImporter(const std::filesystem::path &file_path,
   }
 }
 
-std::vector<CSVRow> CSVImporter::read() const {
+std::vector<CSVRow> CSVReader::read() const {
   std::ifstream file{file_path_};
   if (!file.is_open()) {
     throw CSVImporterException("Couldn't open file.");
@@ -61,7 +61,7 @@ std::vector<CSVRow> CSVImporter::read() const {
   return rows;
 }
 
-std::vector<std::string> CSVImporter::populateHeaders(
+std::vector<std::string> CSVReader::populateHeaders(
     const std::vector<std::string> &tokens) const {
   std::vector<std::string> headers;
   if (config_.has_header) {
@@ -74,7 +74,7 @@ std::vector<std::string> CSVImporter::populateHeaders(
   return headers;
 }
 
-std::vector<std::string> CSVImporter::split(const std::string &line) const {
+std::vector<std::string> CSVReader::split(const std::string &line) const {
   std::vector<std::string> tokens;
   std::istringstream token_stream{std::string{line}};
   std::string token;

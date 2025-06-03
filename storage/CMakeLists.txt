@@ -6,10 +6,10 @@ target_sources(storage
     PUBLIC
     FILE_SET cxx_modules_public TYPE CXX_MODULES
     FILES
-    src/CSVImporter.cpp
+    src/CSVReader.cpp
 
     PRIVATE
-    src/CSVImporter_impl.cpp
+    src/CSVReader_impl.cpp
 )
 
 target_link_libraries(storage PRIVATE
