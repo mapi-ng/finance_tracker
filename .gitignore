@@ -55,7 +55,12 @@ test_output.log
 *.profraw
 *.profdata
 coverage/
+coverage.xml
 
 # Backup files
 *~
 *.bak
+
+# Data files
+*.csv
+*.xlsx
