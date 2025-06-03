@@ -18,6 +18,10 @@ export class Transaction {
 
   uuids::uuid getId() const { return id_; }
   Timestamp getTimestamp() const { return timestamp_; }
+  std::string getDescription() const { return description_; }
+  void setDescription(std::string_view description) {
+    description_ = description;
+  }
 
   void setAmount(unsigned int amount) { amount_ = amount; }
 
@@ -25,6 +29,7 @@ export class Transaction {
   uuids::uuid id_;
   unsigned int amount_;
   Timestamp timestamp_;
+  std::string description_;
 };
 
 }  // namespace core
