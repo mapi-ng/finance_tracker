@@ -18,5 +18,6 @@ sonar.sourceEncoding=UTF-8
 sonar.test.inclusions=**/test/**
 
 sonar.cfamily.enableModules=true
-sonar.test.inclusions=**/test/**
+
+sonar.coverageReportPaths=coverage.xml
 ")
