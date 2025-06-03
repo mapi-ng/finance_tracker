@@ -8,9 +8,11 @@ PUBLIC
     FILES
     src/Importer.ixx
     src/CSVImporter.ixx
+PRIVATE
+    src/CSVImporter_impl.cpp
 )
 
-target_link_libraries(storage PRIVATE 
+target_link_libraries(storage PRIVATE
     spdlog::spdlog
     stduuid::stduuid
     utils
