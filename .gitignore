@@ -1,0 +1,60 @@
+# Build directories
+/build/
+/cmake-build-*/
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+Makefile
+cmake_install.cmake
+compile_commands.json
+
+# Conan files
+conan.lock
+conanbuildinfo.*
+conaninfo.txt
+
+# VS Code and CLion IDE settings
+.vscode/
+.idea/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Editor-specific
+*.swp
+*.swo
+
+# Compiled object files & executables
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dll
+*.exe
+*.out
+
+# Generated files (like version headers)
+generated/
+
+# Unit test outputs
+Testing/
+test_detail.xml
+test_output.log
+
+# Logs
+*.log
+
+# Coverage and profiling files
+*.gcda
+*.gcno
+*.gcov
+*.profraw
+*.profdata
+coverage/
+
+# Backup files
+*~
+*.bak

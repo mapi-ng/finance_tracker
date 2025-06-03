@@ -1,0 +1,40 @@
+cmake_minimum_required(VERSION 3.31)
+project(finance_tracker LANGUAGES CXX)
+message(STATUS "==== Configuring ${PROJECT_NAME} for ${CMAKE_SYSTEM_NAME} ====")
+message(STATUS "${PROJECT_NAME} VERSION: ${GIT_TAG}")
+
+if (UNIX)
+    set(CMAKE_GENERATOR "Ninja")
+    if(NOT CMAKE_GENERATOR STREQUAL "Ninja")
+        message(FATAL_ERROR "This project requires the Ninja generator.")
+    endif()
+endif()
+
+# Create version header and CMake variable
+include(cmake/versionize.cmake)
+
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+# Generate compiler commands for C/C++ intellisense, SonarLint, etc.
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+if (MSVC)
+    # warning level 4
+    add_compile_options(/W4)
+else ()
+    # lots of warnings and all warnings as errors
+    add_compile_options(-Wall -Wextra)
+endif ()
+
+# Include Conan toolchain file if available
+set(CONAN_TOOLCHAIN_FILE "${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}/generators/conan_toolchain.cmake")
+if(EXISTS ${CONAN_TOOLCHAIN_FILE})
+    include(${CONAN_TOOLCHAIN_FILE})
+else()
+    message(WARNING "No conan_toolchain.cmake found, skipping Conan integration.")
+endif()
+
+include(CTest)
+add_subdirectory(core)
