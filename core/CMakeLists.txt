@@ -2,8 +2,9 @@ find_package(spdlog REQUIRED)
 find_package(stduuid REQUIRED)
 
 add_library(core)
-target_sources(core PUBLIC
-    FILE_SET CXX_MODULES
+target_sources(core
+PUBLIC
+    FILE_SET cxx_modules_public TYPE CXX_MODULES
     FILES src/Transaction.ixx
 )
 
