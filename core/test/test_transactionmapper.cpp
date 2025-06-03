@@ -12,7 +12,7 @@ TEST(TransactionMapperTest, Construction) {
   ASSERT_THROW(core::TransactionMapper("invalid-path.json"),
                utils::FailedToOpenFile);
   ASSERT_THROW(core::TransactionMapper("test-data/test-mapping-bad.json"),
-               utils::FailedToOpenFile);
+               utils::FailedToParseJson);
   ASSERT_NO_THROW(
       core::TransactionMapper transactionMapper("test-data/test-mapping.json"));
 }
