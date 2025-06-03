@@ -16,6 +16,7 @@ jobs:
 
     env:
       CONAN_PROFILES_DIR: /conan-profiles
+      BUILD_WRAPPER_OUT_DIR: build_wrapper_output_directory
 
     strategy:
       matrix:
@@ -37,7 +38,9 @@ jobs:
 
       - name: Build (${{ matrix.preset }})
         if: matrix.preset == 'gcc-debug'
-        run: cmake --build --preset ${{ matrix.preset }}
+        run: |
+          cat ${{ env.BUILD_WRAPPER_OUT_DIR }}/compile_commands.json
+          build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake --build --preset ${{ matrix.preset }}
 
       - name: Build (${{ matrix.preset }})
         if: matrix.preset == 'clang-debug'
@@ -65,4 +68,4 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            --define sonar.cfamily.compile-commands="build/${{ matrix.preset }}/compile_commands.json"
+            --define sonar.cfamily.compile-commands="${{ env.BUILD_WRAPPER_OUT_DIR }}/compile_commands.json"
