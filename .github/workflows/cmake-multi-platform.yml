@@ -22,10 +22,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Install dependencies
+      - name: Temporarily move conan packages to current source directory
         run: |
-          sudo apt-get update
-          sudo apt-get install -y g++ clang cmake ninja-build
+          mv /build-conan-packages* .
 
       - name: Configure with CMake preset (${{ matrix.preset }})
         run: cmake --preset ${{ matrix.preset }}
