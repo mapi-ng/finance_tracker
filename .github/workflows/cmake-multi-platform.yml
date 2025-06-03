@@ -23,11 +23,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Before build
         run: |
-          git config --global safe.directory '*'
           echo "Conan profiles directory: $CONAN_PROFILES_DIR"
 
       - name: Configure with CMake preset (${{ matrix.preset }})
