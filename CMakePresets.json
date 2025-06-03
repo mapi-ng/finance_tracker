@@ -62,6 +62,33 @@
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug"
             }
+        },
+        {
+            "name": "msvc-base",
+            "hidden": true,
+            "description": "Base configuration for MSVC 64-bit builds",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "cl.exe",
+                "CMAKE_CXX_COMPILER": "cl.exe"
+            }
+        },
+        {
+            "name": "msvc-release",
+            "inherits": "msvc-base",
+            "description": "Configure with MSVC for 64-bit release build",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        },
+        {
+            "name": "msvc-debug",
+            "inherits": "msvc-base",
+            "description": "Configure with MSVC for 64-bit debug build",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
         }
     ],
     "buildPresets": [
@@ -84,6 +111,16 @@
             "name": "clang-debug",
             "configurePreset": "clang-debug",
             "description": "Build with Clang 20 for 64-bit debug build"
+        },
+        {
+            "name": "msvc-release",
+            "configurePreset": "msvc-release",
+            "description": "Build with MSVC for 64-bit release build"
+        },
+        {
+            "name": "msvc-debug",
+            "configurePreset": "msvc-debug",
+            "description": "Build with MSVC for 64-bit debug build"
         }
     ],
     "testPresets": [
@@ -105,6 +142,16 @@
         {
             "name": "clang-debug",
             "configurePreset": "clang-debug",
+            "description": "Test 64-bit debug build"
+        },
+        {
+            "name": "msvc-release",
+            "configurePreset": "msvc-release",
+            "description": "Test 64-bit release build"
+        },
+        {
+            "name": "msvc-debug",
+            "configurePreset": "msvc-debug",
             "description": "Test 64-bit debug build"
         }
     ]
